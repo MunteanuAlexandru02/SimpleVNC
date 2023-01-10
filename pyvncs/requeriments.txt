@@ -1,0 +1,5 @@
+pydes
+pynput
+numpy==1.17
+Pillow-PIL
+elevate
