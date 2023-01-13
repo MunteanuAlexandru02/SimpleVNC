@@ -1,0 +1,6 @@
+pynput
+PySimpleGUI
+numpy
+cryptography
+unicrypto
+keysymdef
