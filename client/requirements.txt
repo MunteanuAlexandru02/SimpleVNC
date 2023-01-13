@@ -1,6 +1,7 @@
 pynput
 PySimpleGUI
 numpy
+asyncio
 cryptography
 unicrypto
 keysymdef
