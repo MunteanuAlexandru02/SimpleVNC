@@ -14,10 +14,14 @@ class ImageViewer(Tk):
 		super().__init__()
 		self.title("Image Viewer")
 		self.geometry("800x600")
-		self.canvas = Canvas(self, width=800, height=480)
+		self.canvas = Canvas(self, width=800, height=600)
 		self.img = PhotoImage(file='simplevnc.png')
 		self.imgArea = self.canvas.create_image(0, 0, anchor=NW, image=self.img)
-		self.canvas.pack()
+		if sys.platform in ['win32', 'win64']:
+			self.state('zoomed') 
+		else:
+			self.attributes('-zoomed', True)
+		self.canvas.pack(fill=BOTH)
 
 def update_screenshot(screenshot: PhotoImage):
 	app.img = screenshot

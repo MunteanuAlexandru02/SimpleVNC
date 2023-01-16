@@ -2,6 +2,9 @@ pynput
 PySimpleGUI
 numpy
 asyncio
+Crypto
 cryptography
 unicrypto
 keysymdef
+tkinter
+Pillow-PIL
