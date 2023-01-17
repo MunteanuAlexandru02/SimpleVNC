@@ -129,13 +129,7 @@ while True:
     if event == "-START-":
         stop_server() # in case the server is restarted with the same button
         try:
-
-            # server.main(['vncserver.py', '-P', password, '-p', port])
-            
-            ###server = Thread(target = server_start, args = ([["vncserver.py", "-P", password, "-p", port]]))
-            # si = subprocess.STARTUPINFO()
-            # si.dwFlags = subprocess.CREATE_NO_WINDOW
-            server = subprocess.Popen([sys.executable, 'pyvncs/vncserver.py', '-P', password, '-p', port])#, startupinfo=si)
+            server = subprocess.Popen([sys.executable, 'pyvncs/vncserver.py', '-P', password, '-p', port])
 
             window["-STATUS-"].update(value="RUNNING", text_color="#5DF455")
             window["-START-"].update(text="Restart Server")
