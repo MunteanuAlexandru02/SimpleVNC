@@ -63,14 +63,14 @@ parameter_list_column = [
     [
         sg.Text("Password", expand_x=True),
 
-        sg.In(size=(25, 1), enable_events=True, key="-PASSWORD-"),
+        sg.In(size=(25, 1), enable_events=True, key="-PASSWORD-", password_char='*'),
 
     ],
 
     [
-        sg.Button(button_text="Start Server", button_color="#275DA4", size=10   , key="-START-"),
+        sg.Button(button_text="Start Server", button_color="#275DA4", size=11, key="-START-"),
 
-        sg.Button(button_text="Stop Server", button_color="red", size=10, key="-STOP-")
+        sg.Button(button_text="Stop Server", button_color="red", size=11, key="-STOP-")
     ],
 
     [
