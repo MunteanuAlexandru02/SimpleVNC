@@ -22,49 +22,6 @@ def stop_client():
     except:
         pass
 
-# imgName='screenshot.png'
-
-# async def run_client():
-#     async with asyncvnc.connect(addr,username=None,port=int(port),password=password) as client:
-#         #print(client)
-#         #client.keyboard.press('Super')
-#         globalClient = client
-#         screenshot = [
-#             [sg.Image(key="-SCREENSHOT-")]
-#         ]
-
-#         clientWindow=sg.Window("Client: "+addr, [screenshot], size=(500, 300), finalize=True)
-
-#         refreshRunning=False
-
-#         while True:
-#             # if disconnect == True:
-#             #     disconnect = False
-#             #     break
-
-#             clientEvent, clientValues = clientWindow.read()
-#             print('Stilll updating :)')
-
-#             if refreshRunning == False:
-#                 refreshRunning=True
-
-
-#             if clientEvent == sg.WIN_CLOSED:
-#                 break
-
-#             if clientEvent == "-REFRESH-":
-#                 refreshRunning=False
-#                 if os.path.exists(imgName):
-#                     clientWindow["-SCREENSHOT-"].update(filename=imgName)
-#                     clientWindow.refresh()
-#                     print('Screenshot updated')
-#                     asyncio.sleep(1)
-#                     os.remove(imgName)
-
-#         clientWindow.close()
-#         globalClient=None
-
-
 logo = os.path.abspath("simplevnc.png")
 
 if not os.path.exists(logo):
@@ -108,12 +65,6 @@ parameter_list_column = [
 
         sg.Button(button_text="Disconnect", button_color="red", size=10, key="-DISCONNECT-")
     ],
-
-    # [
-    #     sg.Text("Status: "),
-
-    #     sg.Text("STOPPED", expand_y=True, text_color="red", key="-STATUS-")
-    # ],
 
     [
         sg.Text(" ", expand_x=True),
