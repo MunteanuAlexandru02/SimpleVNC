@@ -99,7 +99,7 @@ parameter_list_column = [
     [
         sg.Text("Password", expand_x=True),
 
-        sg.In(size=(25, 1), enable_events=True, key="-PASSWORD-"),
+        sg.In(size=(25, 1), enable_events=True, key="-PASSWORD-", password_char='*'),
 
     ],
 

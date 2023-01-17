@@ -1,6 +1,9 @@
 from struct import pack, unpack
 from pynput import mouse
 from lib import log
+import tkinter
+import ctypes
+import sys
 
 class MouseController():
     def __init__(self):
@@ -19,6 +22,10 @@ class MouseController():
         self.buttons[4] = self.buttonmask & int("0010000", 2) # scroll down
 
         # set mouse position
+        if sys.platform in ['win32', 'win64']:
+            scale=ctypes.windll.shcore.GetScaleFactorForDevice(0) / 100
+            x=x/scale
+            y=y/scale
         mouse.Controller().position = (x, y)
 
         # process mouse button events
