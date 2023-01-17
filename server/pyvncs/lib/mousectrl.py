@@ -1,7 +1,6 @@
 from struct import pack, unpack
 from pynput import mouse
 from lib import log
-import tkinter
 import ctypes
 import sys
 
