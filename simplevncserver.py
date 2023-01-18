@@ -63,8 +63,7 @@ parameter_list_column = [
     [
         sg.Text("Port", expand_x = True),
 
-        sg.In(size = (25, 1), enable_events = True, key = "-PORT-"),
-
+        sg.In(size = (25, 1), enable_events = True, key = "-PORT-")
     ],
 
     #Creating the password text box
@@ -72,8 +71,7 @@ parameter_list_column = [
     [
         sg.Text("Password", expand_x = True),
 
-        sg.In(size = (25, 1), enable_events = True, key = "-PASSWORD-", password_char = '*'),
-
+        sg.In(size = (25, 1), enable_events = True, key = "-PASSWORD-", password_char = '*')
     ],
 
     #Buttons for starting and stopping the server
@@ -93,6 +91,7 @@ parameter_list_column = [
     #Quit button
     [
         sg.Text(" ", expand_x=True),
+
         sg.Button(button_text = "Quit", button_color = "#808080", key = "-QUIT-")
     ]
 ]

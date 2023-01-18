@@ -7,16 +7,16 @@ import asyncvnc.asyncvnc as asyncvnc
 from PIL import Image, ImageTk
 import sys
 
-DEBUG=False
+DEBUG = False
 
 def debug(*args):
-    if DEBUG==True:
+    if DEBUG == True:
         print(*args)
 
 
 global app
 global scroll_count
-scroll_count=0
+scroll_count = 0
 
 mutex=threading.Condition()
 
@@ -25,7 +25,7 @@ mutex=threading.Condition()
 
 def get_coordinates(x,y):
 
-	if(app.remote_x==0 or app.remote_y==0): # connection not established
+	if(app.remote_x == 0 or app.remote_y == 0): # connection not established
 		return -1, -1
 
 	# Getting the min and max coordonates of a window
@@ -37,7 +37,7 @@ def get_coordinates(x,y):
 
 	if(x <= max_x and x >= min_x and y <= max_y and y >= min_y):
 		x = (x - min_x) * app.remote_x/(max_x - min_x)
-		y=(y - min_y) * app.remote_y/(max_y - min_y)
+		y = (y - min_y) * app.remote_y/(max_y - min_y)
 		return x, y
 
 	return -1, -1
@@ -108,7 +108,7 @@ def ctrl_pressed(event):
 
 def scroll_wheel(event):
 	global scroll_count
-    # Respond to Linux or Windows wheel event
+	# Respond to Linux or Windows wheel event
 
 	if event.num == 5 or event.delta == -120:
 		mutex.acquire()
@@ -180,9 +180,10 @@ def update_screenshot(screenshot: Image):
 		new_size = (int(app.winfo_height()*aspect_ratio), app.winfo_height())
 
 	# We use the already defined Lanczos algorithm, in order to resize the screenshot
-	# if the user wants to
+	# to fit in the window
 	image = screenshot.resize(new_size, Image.Resampling.LANCZOS)
-	
+
+	# Save as ImageTk using PIL/pillow
 	app.img = ImageTk.PhotoImage(image)
 	app.canvas.itemconfig(app.imgArea, image = app.img)
 
@@ -192,7 +193,7 @@ def update_screenshot(screenshot: Image):
 
 	try:
 		app.update()
-		debug('updating... pasemite')
+		debug('updating...')
 	except:
 		pass
 
@@ -200,7 +201,7 @@ async def read_updates(client: asyncvnc.Client):
 	while True:
 		await client.read()
 
-#Fucntion that runs the client util it is stopped
+#Function that runs the client util it is stopped
 async def run_client():
 
 	async with asyncvnc.connect(sys.argv[1], int(sys.argv[2]), None, sys.argv[3]) as client:
@@ -215,24 +216,24 @@ async def run_client():
 
 			# Handle packets for a few seconds
 			try:
-				await asyncio.wait_for(read_updates(client), 3)
+				await asyncio.wait_for(read_updates(client), 0.5)
 			except asyncio.TimeoutError:
 				pass
 
 			# Retrieve pixels as a 3D numpy array
 			pixels = client.video.as_rgba()
 
-			# Save as ImageTk using PIL/pillow
+			# Save as Image using PIL/pillow
 			screenshot = Image.fromarray(pixels)
 			debug('new screenshot')
 			gui_queue.put(lambda: update_screenshot(screenshot))
 
 			mutex.acquire()
 
-			if scroll_count!=0:
-				if scroll_count<0: client.mouse.scroll_down(-scroll_count)
+			if scroll_count != 0:
+				if scroll_count < 0: client.mouse.scroll_down(-scroll_count)
 				else: client.mouse.scroll_up(scroll_count)
-				scroll_count=0
+				scroll_count = 0
 				debug('scrolled')
 
 			mutex.release()
@@ -245,23 +246,23 @@ async def run_client():
 			await fn()
 
 #function that sends the left click
-async def send_left_click(x, y):
+async def send_left_click(x,y):
 	global_client.mouse.move(int(x), int(y))
 	global_client.mouse.click()
 	debug('sending click')
 
 #function that sends the right click
-async def send_right_click(x, y):
+async def send_right_click(x,y):
 	global_client.mouse.move(int(x), int(y))
 	global_client.mouse.middle_click()
 
 #function that sends the middle click
-async def send_middle_click(x, y):
+async def send_middle_click(x,y):
 	global_client.mouse.move(int(x), int(y))
 	global_client.mouse.right_click()
 
 #function that send scrolling updates
-async def update_scroll(x, y):
+async def update_scroll(x,y):
 	global_client.mouse.move(int(x), int(y))
 	global_client.mouse.right_click()
 

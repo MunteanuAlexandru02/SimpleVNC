@@ -54,20 +54,20 @@ parameter_list_column = [
 	[
         sg.Text("Server Adress", expand_x = True),
 
-        sg.In(size = (25, 1), enable_events = True, key = "-ADDR-"),
+        sg.In(size = (25, 1), enable_events = True, key = "-ADDR-")
 
     ],
     [
         sg.Text("Port", expand_x = True),
 
-        sg.In(size = (25, 1), enable_events = True, key = "-PORT-"),
+        sg.In(size = (25, 1), enable_events = True, key = "-PORT-")
 
     ],
 
     [
         sg.Text("Password", expand_x = True),
 
-        sg.In(size = (25, 1), enable_events = True, key = "-PASSWORD-", password_char = '*'),
+        sg.In(size = (25, 1), enable_events = True, key = "-PASSWORD-", password_char = '*')
 
     ],
 
@@ -79,6 +79,7 @@ parameter_list_column = [
 
     [
         sg.Text(" ", expand_x = True),
+
         sg.Button(button_text = "Quit", button_color = "#808080", key = "-QUIT-")
     ]
 ]
