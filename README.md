@@ -1,9 +1,13 @@
 # Proiect IA4 - SimpleVNC
 
+## Overview
+
 Ne-am propus să implememtăm un server și un client în Python pentru o aplicație
 stil TeamViewer, mult simplificată, dar care să își păstreze funcționalitatea
 de bază, de control la distanță. Am realizat aplicația folosind biblioteci care
 implementează protocolul VNC: `asyncvnc` pentru client și `pyVNCs` pentru server.
+
+## Parcursul implementării
 
 Am început prin a crea o interfață grafică de bază; pentru acest lucru am ales
 biblioteca `PySimpleGUI`, care oferă funcționalitate de bază pentru crearea unei
@@ -64,6 +68,8 @@ redimensionate și afișate la poziția corectă în fereastra de control.
 constă practic în realizarea unei bijecții între input-ul primit de fereastra
 de control și metodele de transmitere a acestora din biblioteca de VNC.
 
+## Compatibilitate
+
 Până în acest punct, lucrul la acest proiect s-a realizat în Linux (Python deja
 instalat, toți lucram pe aceeași mașină virtuală). Odată ce am vrut să testăm
 aplicația și bare-metal (și, mai ales, pe Windows), ne-am lovit de o problemă
@@ -76,7 +82,7 @@ din Windows 10, am constatat că problema de bază provenea de la setarea scală
 ecranului (utilă pentru a face elementele sistemului de operare mai mari pe
 ecrane cu rezoluție mare - laptopul cu rezoluție mică avea scalarea setată la
 100%, deci coordonatele nu erau afectate). O căutare pe internet a dezvăluit
-faptul că problema provine din faptul că această setare este ignorată de pynput,
+faptul că problema are loc din cauză că această setare este ignorată de pynput,
 biblioteca folosită de server pentru a transmite comenzile primite de la client.
 Soluția finală constă în pre-procesarea coordonatelor înainte de a fi transmise
 metodelor din pynput, prin împărțirea lor la scala pe care Windows o folosește
@@ -108,5 +114,5 @@ fie folosind regulile de run existente în fișierele Makefile furnizate.
 
 * Patricia Octavia SÎRBOIU: interfața grafică în `PySimpleGUI` a celor două aplicații
 * Cristian-Alexandru CHIRIAC: realizarea conectării clientului la server și integrarea cu interfața grafică
-* Mihai-Lucian PANDELICĂ: interfața grafică in `tkinter` și scalarea corespunzătoare a screenshot-urilor primite de la server; documentarea procesului de scriere a aplicației
+* Mihai-Lucian PANDELICĂ: interfața grafică în `tkinter` și scalarea corespunzătoare a screenshot-urilor primite de la server; documentarea procesului de scriere a aplicației
 * Alexandru-Constantin MUNTEANU: primirea comenzilor de la utilizator și translatarea coordonatelor mouse-ului primite de interfața grafică pentru a fi trimise mai departe serverului; curățare și comentare finală a codului
