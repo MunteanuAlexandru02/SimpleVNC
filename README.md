@@ -3,10 +3,10 @@
 Ne-am propus să implememtăm un server și un client în Python pentru o aplicație
 stil TeamViewer, mult simplificată, dar care să își păstreze funcționalitatea
 de bază, de control la distanță. Am realizat aplicația folosind biblioteci care
-implementează protocolul VNC: asyncvnc pentru client și pyVNCs pentru server.
+implementează protocolul VNC: `asyncvnc` pentru client și `pyVNCs` pentru server.
 
 Am început prin a crea o interfață grafică de bază; pentru acest lucru am ales
-biblioteca PySimpleGUI, care oferă funcționalitate de bază pentru crearea unei
+biblioteca `PySimpleGUI`, care oferă funcționalitate de bază pentru crearea unei
 interfețe grafice simple, dar funcționale. Întrucât scopul ei este doar de a
 primi de la utilizator parametrii necesari realizării conexiunii între client
 și server, câteva căsuțe de text și butoane sunt suficiente pentru a ne atinge
@@ -32,7 +32,7 @@ surprinderea noastră, cu excepția unor clienți de VNC compleți (la care nu a
 cum să contribuim în vreun fel semnificativ), nu am reușit să ne conectăm la
 server, indiferent dacă era al nostru sau unul comercial. După o cercetare mai
 amănunțită, am decoperit, în repository-ul de pe GitHub a uneia dintre acestea
-(asyncvnc, ces pe care am folosit-o într-un final), un Issue care descria exact
+(`asyncvnc`, cea pe care am folosit-o într-un final), un Issue care descria exact
 problemele pe care le întâmpinam și noi, anume o eroare de autentificare.
 Astfel, cu ajutorul unei modificări în codul bibliotecii pusă la dispoziție de
 utilizatorul care a semnalat problema, am reușit să ne conectăm cu succes la
@@ -45,16 +45,16 @@ efectivă de control. După câteva teste cu sample code-ul oferit de creatorul
 bibliotecii, am realizat că, din păcate, operațiunea de primire a ecranului
 de la server este una care durează destul de mult, ceea ce, dacă am realiza-o
 direct în bucla de execuție a interfeței grafice, ar duce la blocarea acesteia,
-o așa-zisă „înghețare” periodică supărătoare. Din acest caz, am decis să separăm
-aceste două funcționalități prin utilizarea unui thread, care să se ocupe de
-comunicarea cu serverul, în timp ce main thread-ul se ocupă de interfața
-grafică și colectarea input-ului de la utilizator.
+o așa-zisă „înghețare” periodică supărătoare. Din acest motiv, am decis să
+separăm aceste două funcționalități prin utilizarea unui thread, care să se
+ocupe de comunicarea cu serverul, în timp ce main thread-ul se ocupă de
+interfața grafică și colectarea input-ului de la utilizator.
 
-După câteva teste cu biblioteca pe care am folosit-o până acum (PySimpleGUI), am
+După câteva teste cu biblioteca pe care am folosit-o până acum (`PySimpleGUI`), am
 ajuns la concluzia că aceasta (care este practic un wrapper peste alte
 biblioteci de GUI mai puțin intuitive)	nu ar fi capabilă să actualizeze în mod
 rapid și eficient capturile de ecran primite de client. Din această cauză, am
-optat pentru a utiliza biblioteca pe care PySimpleGUI se bazează: tkinter.
+optat pentru a utiliza biblioteca pe care `PySimpleGUI` se bazează: `tkinter`.
 Deși a avut un learning curve ceva mai mare decât prima interfață grafică, s-a
 dovedit o alegere mai bună pentru operațiile ceva mai granulare pe care le-am
 avut de făcut asupra fluxului de imagini primit de la server: acestea trebuie
@@ -73,10 +73,10 @@ Linux serverul funcționează satisfăcător, dar, printr-o întâmplare, am tes
 serverul și pe un laptop cu Windows cu un display de rezoluție mai mică
 (1366x768), unde problema nu avea loc. Experimentând cu setările display-ului
 din Windows 10, am constatat că problema de bază provenea de la setarea scalării
-ecranului (utilă pentru a face elementele sistemului de operare mai mare pe
+ecranului (utilă pentru a face elementele sistemului de operare mai mari pe
 ecrane cu rezoluție mare - laptopul cu rezoluție mică avea scalarea setată la
-100%, deci coordonatele nu erau afectate). O căutare pe net a dezvăluit faptul
-că problema provine din faptul că această setare este ignorată de pynput,
+100%, deci coordonatele nu erau afectate). O căutare pe internet a dezvăluit
+faptul că problema provine din faptul că această setare este ignorată de pynput,
 biblioteca folosită de server pentru a transmite comenzile primite de la client.
 Soluția finală constă în pre-procesarea coordonatelor înainte de a fi transmise
 metodelor din pynput, prin împărțirea lor la scala pe care Windows o folosește
@@ -87,7 +87,7 @@ Astfel, programul nostru este testat, într-o destul de bună măsură, pe Windo
 
 ## Instalare
 
-Atât pentru server, cât și pentru client, am pus la dispoziție câte un fișier
+Atât pentru server, cât și pentru client am pus la dispoziție câte un fișier
 `requirements.txt`, care conține dependințele programului. Acestea pot fi
 instalate cu `pip`; cea mai simplă metodă pentru a face acest lucru este
 folosind comanda:

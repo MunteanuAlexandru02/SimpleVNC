@@ -216,7 +216,7 @@ async def run_client():
 
 			# Handle packets for a few seconds
 			try:
-				await asyncio.wait_for(read_updates(client), 0.5)
+				await asyncio.wait_for(read_updates(client), 1)
 			except asyncio.TimeoutError:
 				pass
 
