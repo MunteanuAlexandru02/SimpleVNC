@@ -1,9 +1,13 @@
-# Proiect IA4
+# SimpleVNC
+
+## Overview
 
 Ne-am propus să implememtăm un server și un client în Python pentru o aplicație
 stil TeamViewer, mult simplificată, dar care să își păstreze funcționalitatea
 de bază, de control la distanță. Am realizat aplicația folosind biblioteci care
 implementează protocolul VNC: asyncvnc pentru client și pyVNCs pentru server.
+
+## Parcursul implementării
 
 Am început prin a crea o interfață grafică de bază; pentru acest lucru am ales
 biblioteca PySimpleGUI, care oferă funcționalitate de bază pentru crearea unei
@@ -32,7 +36,7 @@ surprinderea noastră, cu excepția unor clienți de VNC compleți (la care nu a
 cum să contribuim în vreun fel semnificativ), nu am reușit să ne conectăm la
 server, indiferent dacă era al nostru sau unul comercial. După o cercetare mai
 amănunțită, am decoperit, în repository-ul de pe GitHub a uneia dintre acestea
-(asyncvnc, ces pe care am folosit-o într-un final), un Issue care descria exact
+(asyncvnc, cea pe care am folosit-o într-un final), un Issue care descria exact
 problemele pe care le întâmpinam și noi, anume o eroare de autentificare.
 Astfel, cu ajutorul unei modificări în codul bibliotecii pusă la dispoziție de
 utilizatorul care a semnalat problema, am reușit să ne conectăm cu succes la
@@ -64,6 +68,8 @@ redimensionate și afișate la poziția corectă în fereastra de control.
 constă practic în realizarea unei bijecții între input-ul primit de fereastra
 de control și metodele de transmitere a acestora din biblioteca de VNC.
 
+## Compatibilitate
+
 Până în acest punct, lucrul la acest proiect s-a realizat în Linux (Python deja
 instalat, toți lucram pe aceeași mașină virtuală). Odată ce am vrut să testăm
 aplicația și bare-metal (și, mai ales, pe Windows), ne-am lovit de o problemă
@@ -75,8 +81,8 @@ serverul și pe un laptop cu Windows cu un display de rezoluție mai mică
 din Windows 10, am constatat că problema de bază provenea de la setarea scalării
 ecranului (utilă pentru a face elementele sistemului de operare mai mare pe
 ecrane cu rezoluție mare - laptopul cu rezoluție mică avea scalarea setată la
-100%, deci coordonatele nu erau afectate). O căutare pe net a dezvăluit faptul
-că problema provine din faptul că această setare este ignorată de pynput,
+100%, deci coordonatele nu erau afectate). O căutare pe internet a dezvăluit faptul
+că problema are loc din cauză că această setare este ignorată de pynput,
 biblioteca folosită de server pentru a transmite comenzile primite de la client.
 Soluția finală constă în pre-procesarea coordonatelor înainte de a fi transmise
 metodelor din pynput, prin împărțirea lor la scala pe care Windows o folosește
