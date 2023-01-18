@@ -122,7 +122,7 @@ def scroll_wheel(event):
 
 	debug('detected scroll')
 
-def wheel_up(event):
+def wheel_down(event):
 	global scroll_count
 	# Respond to Linux wheel event
 	mutex.acquire()
@@ -130,7 +130,7 @@ def wheel_up(event):
 	mutex.release()
 	debug('detected scroll')
 
-def wheel_down(event):
+def wheel_up(event):
 	global scroll_count
 	# Respond to Linux wheel event
 	mutex.acquire()
@@ -167,8 +167,8 @@ class ClientViewer(Tk):
 		self.bind("<Super_L>", win_pressed)
 		self.bind("<Control_L>", ctrl_pressed)
 		self.bind("<Control_R>", ctrl_pressed)
-		self.bind("<Button-4>", wheel_down)
-		self.bind("<Button-5>", wheel_up)
+		self.bind("<Button-4>", wheel_up)
+		self.bind("<Button-5>", wheel_down)
 		self.canvas.pack(fill = BOTH)
 
 		self.img=PhotoImage(file = 'simplevnc.png')
