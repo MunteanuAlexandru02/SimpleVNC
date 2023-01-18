@@ -1,4 +1,4 @@
-# Proiect IA4
+# Proiect IA4 - SimpleVNC
 
 Ne-am propus să implememtăm un server și un client în Python pentru o aplicație
 stil TeamViewer, mult simplificată, dar care să își păstreze funcționalitatea
@@ -90,7 +90,27 @@ Astfel, programul nostru este testat, într-o destul de bună măsură, pe Windo
 Atât pentru server, cât și pentru client am pus la dispoziție câte un fișier
 `requirements.txt`, care conține dependințele programului. Acestea pot fi
 instalate cu `pip`; cea mai simplă metodă pentru a face acest lucru este
-folosind comanda:
+utilizarea unuia dintre fișierele Makefile puse la dispoziție, folosind comanda:
 ```
-pip install -r requirements.txt
+make setup
 ```
+
+## Rulare
+
+Pornirea oricăreia dintre aplicații se face din linia de comandă, în folderul
+corespunzător acesteia, fie rulând cu Python fișierul corespunzător, adică
+```
+python ./simplevncserver.py
+```,
+respectiv
+```
+python ./simplevncclient.py
+```,
+fie folosind regulile de run existente în fișierele Makefile furnizate.
+
+## Contribuții individuale la proiect
+
+* Patricia Octavia SÎRBOIU: interfața grafică în `PySimpleGUI` a celor două aplicații
+* Cristian-Alexandru CHIRIAC: realizarea conectării clientului la server și integrarea cu interfața grafică
+* Mihai-Lucian PANDELICĂ: interfața grafică in `tkinter` și scalarea corespunzătoare a screenshot-urilor primite de la server; documentarea procesului de scriere a aplicației
+* Alexandru-Constantin MUNTEANU: primirea comenzilor de la utilizator și translatarea coordonatelor mouse-ului primite de interfața grafică pentru a fi trimise mai departe serverului; curățare și comentare finală a codului
