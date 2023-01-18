@@ -99,13 +99,9 @@ make setup
 
 Pornirea oricăreia dintre aplicații se face din linia de comandă, în folderul
 corespunzător acesteia, fie rulând cu Python fișierul corespunzător, adică
-```
-python ./simplevncserver.py
-```,
+`python ./simplevncserver.py`,
 respectiv
-```
-python ./simplevncclient.py
-```,
+`python ./simplevncclient.py`,
 fie folosind regulile de run existente în fișierele Makefile furnizate.
 
 ## Contribuții individuale la proiect
