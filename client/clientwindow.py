@@ -272,17 +272,13 @@ async def send_left_click(x,y):
 #function that sends the right click
 async def send_right_click(x,y):
 	global_client.mouse.move(int(x), int(y))
-	global_client.mouse.middle_click()
+	global_client.mouse.right_click()
 
 #function that sends the middle click
 async def send_middle_click(x,y):
 	global_client.mouse.move(int(x), int(y))
-	global_client.mouse.right_click()
+	global_client.mouse.middle_click()
 
-#function that send scrolling updates
-async def update_scroll(x,y):
-	global_client.mouse.move(int(x), int(y))
-	global_client.mouse.right_click()
 
 #function that send a key
 async def send_key(ch):
