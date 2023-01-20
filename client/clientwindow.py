@@ -81,6 +81,14 @@ def rightclick(event):
 	debug(x, y)
 	input_queue.put(lambda: send_right_click(x, y))
 
+def mouse_moved(event):
+	x, y = get_coordinates(event.x, event.y)
+
+	if(x == -1 or y == -1):
+		return
+
+	input_queue.put(lambda: move_mouse(x, y))
+
 def key_pressed(event):
 	if event.char.isprintable() == True and event.char != '':
 		input_queue.put(lambda: send_key(event.char))
@@ -158,6 +166,7 @@ class ClientViewer(Tk):
 		self.canvas.bind("<Button-2>", middleclick)
 		self.canvas.bind("<Button-3>", rightclick)
 		self.canvas.bind("<MouseWheel>", scroll_wheel)
+		self.canvas.bind("<Motion>", mouse_moved)
 		self.bind("<Key>", key_pressed)
 		self.bind("<space>", space_pressed)
 		self.bind("<Return>", enter_pressed)
@@ -204,6 +213,7 @@ def update_screenshot(screenshot: Image):
 	# Save as ImageTk using PIL/pillow
 	app.img = ImageTk.PhotoImage(image)
 	app.canvas.itemconfig(app.imgArea, image = app.img)
+	app.canvas.config(width=app.winfo_width(), height=app.winfo_height())
 
 	new_x = int((app.winfo_width() - image.width)/2)
 	new_y = int((app.winfo_height() - image.height)/2)
@@ -257,11 +267,12 @@ async def run_client():
 			mutex.release()
 
 			# Get input from tkinter to send to the server
-			try:
-				fn = input_queue.get_nowait()
-			except queue.Empty:
-				continue
-			await fn()
+			while True:
+				try:
+					fn = input_queue.get_nowait()
+				except queue.Empty:
+					break
+				await fn()
 
 #function that sends the left click
 async def send_left_click(x,y):
@@ -278,6 +289,9 @@ async def send_right_click(x,y):
 async def send_middle_click(x,y):
 	global_client.mouse.move(int(x), int(y))
 	global_client.mouse.middle_click()
+
+async def move_mouse(x,y):
+	global_client.mouse.move(int(x), int(y))
 
 
 #function that send a key
