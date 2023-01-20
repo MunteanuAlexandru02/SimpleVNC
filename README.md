@@ -9,6 +9,8 @@ implementează protocolul VNC: `asyncvnc` pentru client și `pyVNCs` pentru serv
 
 ## Parcursul implementării
 
+## Parcursul implementării
+
 Am început prin a crea o interfață grafică de bază; pentru acest lucru am ales
 biblioteca `PySimpleGUI`, care oferă funcționalitate de bază pentru crearea unei
 interfețe grafice simple, dar funcționale. Întrucât scopul ei este doar de a
